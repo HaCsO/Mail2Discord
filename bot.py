@@ -3,6 +3,7 @@ import imaplib
 import email
 from discord.ext import commands
 import configparser
+import os
 
 cfg = configparser.ConfigParser()
 cfg.read(os.getcwd() + "/config.cfg")

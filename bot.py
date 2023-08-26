@@ -2,15 +2,19 @@ import discord
 import imaplib
 import email
 from discord.ext import commands
+import configparser
 
-TOKEN = ""
-GMAIL_USER = ""
-GMAIL_PASSWORD = ""
-TARGET_EMAIL = ""
+cfg = configparser.ConfigParser()
+cfg.read("config.cfg")
+only_channel = int(cfg["GENERAL"]["channel_id"])
+TOKEN = cfg["GENERAL"]["token"]
+GMAIL_USER = cfg["GENERAL"]["gmail_user"]
+GMAIL_PASSWORD = cfg["GENERAL"]["gmail_pass"]
+TARGET_EMAIL = cfg["GENERAL"]["target_mail"]
 
-intents = discord.Intents.all()
+intents = discord.Intents.default()
 
-bot = commands.Bot(command_prefix='!', intents=intents, debug_guilds=[564902261327921186])
+bot = commands.Bot(command_prefix='!', intents=intents, debug_guilds=[686268385138573487])
 
 @bot.event
 async def on_ready():
@@ -44,6 +48,7 @@ async def check_emails(ctx):
         if len(i) and i[-1] == ":":
             finded = True
     mail.logout()
-    await ctx.respond(finded if finded else "No code found!")
+    await bot.get_channel(only_channel).send(f"`{finded}`" if finded else (f"`{dat[151][-11:-5]}`" if len(dat) else "Code not found!"))
+    await ctx.respond(f"Смотри в <#{only_channel}>") # hardcoooode!!!
 
 bot.run(TOKEN)

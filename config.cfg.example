@@ -1,0 +1,6 @@
+[GENERAL]
+token = YOURTOKENHERE
+channel_id = channel_id_where_must_send
+gmail_user = example@gmail.com
+gmail_pass = 123456789
+target_mail = target@gmail.com

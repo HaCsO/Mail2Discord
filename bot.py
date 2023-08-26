@@ -4,9 +4,10 @@ import email
 from discord.ext import commands
 import configparser
 import daemon
+import os
 
 cfg = configparser.ConfigParser()
-cfg.read("config.cfg")
+cfg.read(os.getcwd() + "config.cfg")
 only_channel = int(cfg["GENERAL"]["channel_id"])
 TOKEN = cfg["GENERAL"]["token"]
 GMAIL_USER = cfg["GENERAL"]["gmail_user"]

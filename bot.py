@@ -3,6 +3,7 @@ import imaplib
 import email
 from discord.ext import commands
 import configparser
+import daemon
 
 cfg = configparser.ConfigParser()
 cfg.read("config.cfg")
@@ -51,4 +52,5 @@ async def check_emails(ctx):
     await bot.get_channel(only_channel).send(f"`{finded}`" if finded else (f"`{dat[151][-11:-5]}`" if len(dat) else "Code not found!"))
     await ctx.respond(f"Смотри в <#{only_channel}>") # hardcoooode!!!
 
-bot.run(TOKEN)
+with daemon.DaemonContext():
+    bot.run(TOKEN)

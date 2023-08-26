@@ -6,7 +6,7 @@ import configparser
 import os
 
 cfg = configparser.ConfigParser()
-cfg.read(os.getcwd() + "/config.cfg")
+cfg.read("/root/Mail2Discord/config.cfg")
 only_channel = int(cfg["GENERAL"]["channel_id"])
 TOKEN = cfg["GENERAL"]["token"]
 GMAIL_USER = cfg["GENERAL"]["gmail_user"]
